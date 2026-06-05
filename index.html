@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dulguun Sukhchuluun — Data Science Portfolio</title>
+<meta name="description" content="Data Science portfolio of Dulguun Sukhchuluun. Projects in machine learning, NLP, time-series forecasting, and computer vision.">
+<style>
+  :root {
+    --accent: #5b58a6;
+    --accent-soft: #ecebf7;
+    --accent-dark: #3f3d7a;
+    --ink: #1a1a1a;
+    --muted: #4a4a4a;
+    --line: #e2e2ec;
+    --bg: #ffffff;
+    --card: #faf9fc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; padding-bottom: 14px; }
+  nav .brand { font-weight: 400; letter-spacing: .5px; color: var(--muted); font-size: 13px; }
+  nav .brand .accent { color: var(--accent); font-weight: 800; font-size: 19px; margin-right: 4px; }
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14.5px; font-weight: 500; }
+  nav a:hover { color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  header {
+    padding: 80px 0 60px;
+    background: linear-gradient(180deg, var(--accent-soft) 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  header .wrap { display: grid; grid-template-columns: 1fr 200px; gap: 50px; align-items: center; }
+  header .photo {
+    width: 180px; height: 180px; border-radius: 50%;
+    background: #ddd; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(91,88,166,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #888; letter-spacing: 1px; text-transform: uppercase; justify-self: center;
+  }
+  header h1 { font-size: 42px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; color: var(--ink); }
+  header h1 .accent { color: var(--accent); }
+  header .role { font-size: 19px; color: var(--accent); font-weight: 600; margin-top: 10px; letter-spacing: 0.3px; }
+  header .bio { font-size: 16.5px; color: var(--muted); margin-top: 18px; max-width: 540px; }
+  header .links { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+  header .links a {
+    text-decoration: none; padding: 9px 16px; border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    border: 1.5px solid var(--accent); color: var(--accent); background: #fff;
+    transition: all .2s;
+  }
+  header .links a:hover { background: var(--accent); color: #fff; }
+  header .links a.primary { background: var(--accent); color: #fff; }
+  header .links a.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 70px 0; border-bottom: 1px solid var(--line); }
+  section h2 {
+    font-size: 28px; font-weight: 800; letter-spacing: -0.3px; color: var(--ink);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 12px;
+  }
+  section h2 .num { font-size: 14px; color: var(--accent); font-weight: 700; letter-spacing: 2px; }
+  section .lede { font-size: 16px; color: var(--muted); margin-bottom: 36px; max-width: 640px; }
+
+  /* skills */
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .skill-card {
+    background: var(--card); border-radius: 12px; padding: 20px 22px;
+    border: 1px solid var(--line);
+  }
+  .skill-card h3 { font-size: 14px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .skill-card p { font-size: 15px; color: var(--ink); line-height: 1.55; }
+
+  /* projects */
+  .project {
+    background: var(--card); border-radius: 16px; padding: 32px 34px;
+    border: 1px solid var(--line); margin-bottom: 28px;
+    transition: box-shadow .3s;
+  }
+  .project:hover { box-shadow: 0 14px 40px rgba(91,88,166,0.10); }
+  .project .top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+  .project .title { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.2px; }
+  .project .meta { font-size: 13px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+  .project .tagline { font-size: 16.5px; color: var(--accent-dark); font-weight: 600; margin-bottom: 18px; }
+  .project .block { margin-bottom: 14px; }
+  .project .label {
+    font-size: 11.5px; font-weight: 800; color: var(--accent); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 4px;
+  }
+  .project .body { font-size: 15.5px; color: var(--ink); line-height: 1.6; }
+  .project .results { background: var(--accent-soft); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
+  .project .results .label { color: var(--accent-dark); }
+  .project .results .body { font-size: 15.5px; font-weight: 500; color: var(--ink); }
+  .project .stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .project .tag {
+    background: #fff; border: 1px solid var(--line); color: var(--ink);
+    padding: 5px 11px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  }
+  .project .actions { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+  .project .actions a {
+    text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 14px;
+    border-radius: 8px; border: 1.5px solid var(--accent); color: var(--accent);
+    transition: all .2s;
+  }
+  .project .actions a:hover { background: var(--accent); color: #fff; }
+
+  /* footer */
+  footer { padding: 50px 0; text-align: center; }
+  footer p { color: var(--muted); font-size: 14.5px; margin-bottom: 6px; }
+  footer .made { font-size: 12px; color: #aaa; margin-top: 18px; }
+
+  /* responsive */
+  @media (max-width: 720px) {
+    header { padding: 50px 0 40px; }
+    header .wrap { grid-template-columns: 1fr; gap: 30px; }
+    header .photo { order: -1; width: 140px; height: 140px; }
+    header h1 { font-size: 32px; }
+    section { padding: 50px 0; }
+    nav ul { gap: 16px; }
+    .project { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="accent">Dulguun</span> Sukhchuluun</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="about">
+  <div class="wrap">
+    <div>
+      <h1>Hi, I'm <span class="accent">Dulguun</span>.</h1>
+      <div class="role">Data Scientist / Data Analyst</div>
+      <p class="bio">
+        Data Science graduate (B.Sc., GPA 3.7) from AUM University in Mongolia. I build end-to-end
+        machine learning and AI applications in Python — from data collection and cleaning through
+        modeling, evaluation, and deployment. Hands-on across predictive modeling, deep learning,
+        and natural language processing.
+      </p>
+      <div class="links">
+        <a class="primary" href="#projects">See my projects</a>
+        <a href="mailto:dulguun.sukhchuluun@gmail.com">Email me</a>
+        <a href="https://github.com/SDulguun" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/dulguun-sukhchuluun-4a9709411" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="photo">Photo</div>
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <h2><span class="num">01</span> Skills</h2>
+    <p class="lede">The tools and methods I use to take a problem from raw data to a working solution.</p>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>Programming &amp; Data</h3>
+        <p>Python (pandas, NumPy), SQL</p>
+      </div>
+      <div class="skill-card">
+        <h3>Machine Learning</h3>
+        <p>scikit-learn, PyTorch, predictive modeling, deep learning (CNNs, Vision Transformers)</p>
+      </div>
+      <div class="skill-card">
+        <h3>NLP &amp; Generative AI</h3>
+        <p>TF-IDF, Sentence Transformers, Whisper, LLM integration (Claude API)</p>
+      </div>
+      <div class="skill-card">
+        <h3>Analysis &amp; Visualization</h3>
+        <p>EDA, data cleaning, statistical analysis, Matplotlib, Seaborn</p>
+      </div>
+      <div class="skill-card">
+        <h3>BI &amp; Tools</h3>
+        <p>Power BI, Tableau, Power Automate, Git, FastAPI</p>
+      </div>
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <p>English (Fluent) · Chinese (Beginner)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <h2><span class="num">02</span> Projects</h2>
+    <p class="lede">Five end-to-end projects spanning banking risk analytics, NLP, time-series, computer vision, and applied AI.</p>
+
+    <!-- Loan Default Risk Analysis -->
+    <div class="project">
+      <div class="top">
+        <div class="title">Loan Default Risk Analysis</div>
+        <div class="meta">Lending Club 2007–2018 · 2026</div>
+      </div>
+      <div class="tagline">SQL + Tableau analysis of 2.3 million consumer loans.</div>
+
+      <div class="block">
+        <div class="label">Problem</div>
+        <div class="body">Who should a lender lend to, and at what price? I used Lending Club's full 2007–2018 loan book — every loan they funded, with both the borrower's profile and whether they paid it back — to find out.</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Approach</div>
+        <div class="body">Wrote 10 SQL queries to slice the data by borrower features (FICO, DTI, employment) and loan terms, then built a 4-page Tableau dashboard for portfolio risk monitoring.</div>
+      </div>
+
+      <div class="results">
+        <div class="label">Key findings</div>
+        <div class="body">Lending Club's <b>high-risk grades (E–G) lost money</b> even at 21–28% interest — defaults outpaced the pricing. <b>60-month loans defaulted at twice the rate</b> of 36-month loans (32% vs 16%), for only 4.6 percentage points more interest.</div>
+      </div>
+
+      <div class="stack">
+        <span class="tag">DuckDB</span><span class="tag">SQL</span><span class="tag">CTEs &amp; Window Functions</span>
+        <span class="tag">Tableau Public</span><span class="tag">Python</span>
+      </div>
+
+      <div class="actions">
+        <a href="https://github.com/SDulguun/loan-default-analysis" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <!-- AI Interview Coach -->
+    <div class="project">
+      <div class="top">
+        <div class="title">AI Interview Coach</div>
+        <div class="meta">Capstone · 2025–2026</div>
+      </div>
+      <div class="tagline">A bilingual interview-practice platform — the first of its kind for the Mongolian market.</div>
+
+      <div class="block">
+        <div class="label">Problem</div>
+        <div class="body">Mongolian job-seekers have very limited access to realistic, affordable interview practice. International tools are English-only and miss local interview style and cultural context.</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Approach</div>
+        <div class="body">Built a full-stack bilingual (Mongolian/English) web platform: voice-to-text via Whisper, semantic answer evaluation using Sentence Transformers + TF-IDF, and feedback generation with the Claude API. Curated a dataset of 489 real question–answer pairs from 18 Mongolian companies and engineered a 5-dimension scoring system covering content, structure, clarity, depth, and relevance.</div>
+      </div>
+
+      <div class="results">
+        <div class="label">Results</div>
+        <div class="body">Statistically validated the automatic scoring engine against human expert judgment, achieving significant agreement (<b>p &lt; 0.05</b>). First Mongolian-language interview-prep platform of its kind.</div>
+      </div>
+
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Whisper</span>
+        <span class="tag">Sentence Transformers</span><span class="tag">TF-IDF</span><span class="tag">Claude API</span>
+        <span class="tag">React</span><span class="tag">Vercel</span>
+      </div>
+
+    </div>
+
+    <!-- PM2.5 -->
+    <div class="project">
+      <div class="top">
+        <div class="title">Ulaanbaatar PM2.5 Forecasting</div>
+        <div class="meta">ML Benchmark Study · 2025</div>
+      </div>
+      <div class="tagline">The first local machine-learning benchmark for hourly PM2.5 prediction in one of the world's most polluted winter capitals.</div>
+
+      <div class="block">
+        <div class="label">Problem</div>
+        <div class="body">Ulaanbaatar suffers from severe winter air pollution, yet no local benchmark existed for hourly PM2.5 forecasting. Without a baseline, it's impossible to know whether complex models actually help — or whether simpler approaches are enough.</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Approach</div>
+        <div class="body">Collected 21,112 hourly observations and engineered 39 features (calendar, weather, lag-based). Trained and compared four models (Ridge regression, Random Forest, HistGBM, and an LSTM) using a strict chronological holdout to prevent data leakage.</div>
+      </div>
+
+      <div class="results">
+        <div class="label">Results</div>
+        <div class="body">The best model — <b>Ridge regression</b> — reached <b>R² = 0.899</b> and <b>MAE = 3.70 µg/m³</b>, outperforming the LSTM baseline. Key insight: lag features mattered more than model complexity for this problem.</div>
+      </div>
+
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span>
+        <span class="tag">PyTorch (LSTM)</span><span class="tag">Open-Meteo API</span>
+      </div>
+
+    </div>
+
+    <!-- Deepfake -->
+    <div class="project">
+      <div class="top">
+        <div class="title">Deepfake Detection</div>
+        <div class="meta">Multi-Paradigm Comparative Study · 2025</div>
+      </div>
+      <div class="tagline">Benchmarking five deepfake-detection approaches under realistic image degradation.</div>
+
+      <div class="block">
+        <div class="label">Problem</div>
+        <div class="body">Most deepfake-detection papers report accuracy on clean, pristine images — but real-world content is compressed, blurred, and noisy. The clean-image champion isn't always the best in production.</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Approach</div>
+        <div class="body">Benchmarked five methods (Fourier-frequency analysis, CNN, Vision Transformer, foundation models) on 10,000 StyleGAN face images under realistic degradation (Gaussian blur, JPEG compression). Used McNemar's test for pairwise statistical comparison.</div>
+      </div>
+
+      <div class="results">
+        <div class="label">Results</div>
+        <div class="body"><b>ResNet50</b> was best on clean images (<b>98.2%</b>), but <b>ViT-B/16</b> was far more robust under blur (<b>78.6%</b> vs <b>59.9%</b> for ResNet50). The best clean-image model is not the best real-world model.</div>
+      </div>
+
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">torchvision</span>
+        <span class="tag">OpenAI CLIP</span><span class="tag">scikit-learn</span><span class="tag">OpenCV</span>
+        <span class="tag">SciPy</span>
+      </div>
+
+    </div>
+
+    <!-- Personal AI Bot -->
+    <div class="project">
+      <div class="top">
+        <div class="title">Personal AI Assistant Bot</div>
+        <div class="meta">Telegram + Claude · 2025</div>
+      </div>
+      <div class="tagline">A 4-skill Telegram assistant that connects my personal academic life to LLM workflows.</div>
+
+      <div class="block">
+        <div class="label">Problem</div>
+        <div class="body">Like every student, I juggle Moodle deadlines, a personal task list, and ad-hoc research questions across different apps. I wanted a single conversational interface that could do all four.</div>
+      </div>
+
+      <div class="block">
+        <div class="label">Approach</div>
+        <div class="body">Built a Telegram bot in Python with four skills: Moodle-deadline fetcher (via Moodle REST API), personal task manager, web-research summarizer, and AI tutor (Claude). Implemented skill chaining so commands can combine — e.g. "fetch this week's deadlines and import them as tasks" runs in one step.</div>
+      </div>
+
+      <div class="results">
+        <div class="label">Results</div>
+        <div class="body">A working personal-productivity bot used daily. Demonstrates LLM-tool integration, API orchestration, and skill chaining.</div>
+      </div>
+
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">Claude API</span>
+        <span class="tag">Telegram Bot API</span><span class="tag">Moodle REST API</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <h2><span class="num">03</span> Get in touch</h2>
+    <p class="lede">Open to data analyst and data scientist roles. If something here is interesting, let's talk.</p>
+    <div class="links" style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="mailto:dulguun.sukhchuluun@gmail.com" style="text-decoration:none; padding:10px 18px; border-radius:999px; font-weight:600; background:var(--accent); color:#fff;">dulguun.sukhchuluun@gmail.com</a>
+      <a href="https://github.com/SDulguun" target="_blank" rel="noopener" style="text-decoration:none; padding:10px 18px; border-radius:999px; font-weight:600; border:1.5px solid var(--accent); color:var(--accent);">GitHub</a>
+      <a href="https://www.linkedin.com/in/dulguun-sukhchuluun-4a9709411" target="_blank" rel="noopener" style="text-decoration:none; padding:10px 18px; border-radius:999px; font-weight:600; border:1.5px solid var(--accent); color:var(--accent);">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Dulguun Sukhchuluun</b> · Ulaanbaatar, Mongolia</p>
+    <p>Data Scientist / Data Analyst · B.Sc. from AUM University (2026)</p>
+    <p class="made">Hand-built · Hosted on GitHub Pages</p>
+  </div>
+</footer>
+
+</body>
+</html>
